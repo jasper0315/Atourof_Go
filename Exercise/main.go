@@ -1,22 +1,20 @@
 package main
 
 import (
-	"fmt"
-	"math"
+	"golang.org/x/tour/pic"
 )
 
-func Sqrt(x float64) float64 {
-	z := 1.0
-	delta := 0.00001
-
-	for math.Abs(z*z-x) > delta {
-		z -= (z*z - x) / (2 * z)
+func Pic(dx, dy int) [][]uint8 {
+	picture := make([][]uint8, dy)
+	for y := 0; y < dy; y++ {
+		picture[y] = make([]uint8, dx)
+		for x := 0; x < dx; x++ {
+			picture[y][x] = uint8((x + y) / 2)
+		}
 	}
-
-	return z
+	return picture
 }
 
 func main() {
-	x := 16.0
-	fmt.Printf("Sqrt(%g) = %g\n", x, Sqrt(x))
+	pic.Show(Pic)
 }
